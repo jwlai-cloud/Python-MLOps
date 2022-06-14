@@ -10,8 +10,7 @@ from app import app as flask_app
 @pytest.fixture
 def test_array():
     val = np.array(1)
-    feature = val.reshape(-1, 1)
-    return feature
+    return val.reshape(-1, 1)
 
 @pytest.fixture
 def app():
