@@ -18,13 +18,11 @@ warnings.filterwarnings("ignore", category=UserWarning)
 def load_model(model="model.joblib"):
     """Grabs model from disk"""
 
-    clf = joblib.load(model)
-    return clf
+    return joblib.load(model)
 
 
 def data():
-    df = pd.read_csv("htwtmlb.csv")
-    return df
+    return pd.read_csv("htwtmlb.csv")
 
 
 def retrain(tsize=0.1, model_name="model.joblib"):
@@ -57,8 +55,7 @@ def format_input(x):
     """Takes int and converts to numpy array"""
 
     val = np.array(x)
-    feature = val.reshape(-1, 1)
-    return feature
+    return val.reshape(-1, 1)
 
 
 def scale_input(val):
@@ -68,8 +65,7 @@ def scale_input(val):
     features = df["Weight"].values
     features = features.reshape(-1, 1)
     input_scaler = StandardScaler().fit(features)
-    scaled_input = input_scaler.transform(val)
-    return scaled_input
+    return input_scaler.transform(val)
 
 
 def scale_target(target):
@@ -80,8 +76,7 @@ def scale_target(target):
     y = y.reshape(-1, 1)  # Reshape
     scaler = StandardScaler()
     y_scaler = scaler.fit(y)
-    scaled_target = y_scaler.inverse_transform(target)
-    return scaled_target
+    return y_scaler.inverse_transform(target)
 
 
 def height_human(float_inches):
@@ -89,19 +84,17 @@ def height_human(float_inches):
 
     feet = int(round(float_inches / 12, 2))  # round down
     inches_left = round(float_inches - feet * 12)
-    result = f"{feet} foot, {inches_left} inches"
-    return result
+    return f"{feet} foot, {inches_left} inches"
 
 
 def human_readable_payload(predict_value):
     """Takes numpy array and returns back human readable dictionary"""
 
     height_inches = float(np.round(predict_value, 2))
-    result = {
+    return {
         "height_inches": height_inches,
         "height_human_readable": height_human(height_inches),
     }
-    return result
 
 
 def predict(weight):
